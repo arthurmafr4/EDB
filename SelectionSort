@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define TAM 1000
+
+int EncontraMenor(int vetor[], int tam, int i); //(vetor, tamnho, indice)
+void SelectionSort(int vetor[], int tamanho);
+int main()
+{
+    /*int tamanho;
+    printf("Qual o tamanho do vetor");
+    scanf("%d",&tamanho);*/
+    int vetor[TAM];
+    for(int i = 0; i < TAM; i++){
+        vetor[i] = rand()%TAM;
+    }
+
+    // printando vetor antes da ordenação
+    printf("Vetor antes da ordenacao: ");
+    printf("[");
+    for(int i = 0; i < TAM; i++){
+        printf("%d ",vetor[i]);
+    }
+    printf("]\n\n");
+
+    // chamando a função que irá ordenar o array
+    SelectionSort(vetor, TAM);
+
+    // printando o vetor ordenado
+    printf("\nVetor ordenado: ");
+    printf("[");
+    for (int i = 0; i < TAM; i++){
+        printf("%d ", vetor[i]);
+    }
+    printf("]");
+    return 0;
+}
+
+void SelectionSort(int vetor[], int tamanho){
+    int aux;
+    int menorValor;
+    for(int i = 0; i < tamanho; i++){
+        menorValor = EncontraMenor(vetor, tamanho, i);
+        aux = vetor[i];
+        vetor[i] = vetor[menorValor];
+        vetor[menorValor] = aux;
+    }
+
+}
+
+// encontrando o indice onde esta o menor valor
+int EncontraMenor(int vetor[], int tam, int i){
+    int menor = i;// a variavel menor esta recebendo o indice atual do vetor
+    for (int j = i + 1; j < tam; j++){ // i +1 pq pega=se a posição seguinte a q foi passada pelo indice i
+        if (vetor[j] < vetor[menor]){
+            menor = j;// atualiza o índice onde está o menor valor
+        }
+    }
+    return menor;
+}
